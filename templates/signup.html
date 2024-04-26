@@ -12,13 +12,15 @@
         }
         body{
             margin-top: 100px;
-            background-color: purple
+            background-color: rgb(88, 224, 234);
         }
         #signup{
             display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-left: 30%;
+    margin-right: 30%;
     border-style: outset;
     padding-bottom: 50px;
     background-color: white;
@@ -44,9 +46,7 @@
                 submit
             </button>
             <p>Already have an account</p>
-            <button name="button" value="login">
-               login
-            </button>
+            <a href="/">login</a>
             {% if found==true %}
             <script>
                 alert("woww! you are successfully registered\nPlease login to continue");

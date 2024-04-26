@@ -1,16 +1,16 @@
 from flask import Flask,render_template, request,redirect, url_for,jsonify
 import json
-import pywhatkit
-import pyautogui as pg
-from pywhatkit.core import core, exceptions, log
-import datetime
-import time
+# import pywhatkit
+# import pyautogui as pg
+# from pywhatkit.core import core, exceptions, log
+# import datetime
+# import time
 
 app = Flask(__name__)
 
-pg.FAILSAFE = False
+# pg.FAILSAFE = False
 
-core.check_connection()
+# core.check_connection()
 
 @app.route("/shedule/<id>",methods=["GET","POST"])
 def shedule(id):
@@ -23,7 +23,7 @@ def shedule(id):
         if button=="rem":
             phone=request.form.get("phone")
             add_phone(id,phone)
-            msg_sent(id)
+            # msg_sent(id)
     return render_template("shedule.html",data=data,found=found,id=id)
 
 @app.route("/home/<id>",methods=["GET","POST"])
@@ -58,14 +58,10 @@ def signup():
         username=request.form.get("username")
         password=request.form.get("password")
         id=username+"+"+password
-        button=request.form.get("button")
-        if button=="login":
-            return redirect(url_for("login"))
-        else:
-            if username!="" and password!="":
-                data=new_user(id)
-                if id in data:
-                    found=True
+        if username and password:
+            data=new_user(id)
+            if id in data:
+                found=True
     return render_template("signup.html",found=found)
 
 @app.route("/",methods=["GET","POST"])   #login page 
@@ -75,15 +71,11 @@ def login():
         username=request.form.get("username")
         password=request.form.get("password")
         id=username+"+"+password
-        button=request.form.get("button")
-        if button=="login":
-            data=get_data()
-            if id in data:
-                return redirect(url_for("home",id=id))
-            else:
-                found=False
-        if button=="signup":
-           return redirect(url_for("signup")) 
+        data=get_data()
+        if id in data:
+            return redirect(url_for("home",id=id))
+        else:
+            found=False
     return render_template("login.html",found=found)
 
 def get_data():
@@ -140,21 +132,21 @@ def add_phone(id,no):  #add phone number
         with open('patient.json', 'w') as save:
             json.dump(data,save)
 
-def msg_sent(id):
-    m_data=get_m_info(id)
-    m_data.sort(key=get_time)
-    phone=get_phone(id)
-    if phone:
-        for i in m_data:
-            if i["time"]:
-                name=i['m_info']
-                msg=f"Important Remainder!!!\nmedicine time: {name}"
-                hour, minute = i['time'].split(":")
-                # minute=int(minute)
-                # hour=int(hour)
-                # print(i["time"],hour,minute)
-                # return 0
-                sendwhatmsg(phone,msg,hour,min)
+# def msg_sent(id):
+#     m_data=get_m_info(id)
+#     m_data.sort(key=get_time)
+#     phone=get_phone(id)
+#     if phone:
+#         for i in m_data:
+#             if i["time"]:
+#                 name=i['m_info']
+#                 msg=f"Important Remainder!!!\nmedicine time: {name}"
+#                 hour, minute = i['time'].split(":")
+#                 # minute=int(minute)
+#                 # hour=int(hour)
+#                 # print(i["time"],hour,minute)
+#                 # return 0
+#                 sendwhatmsg(phone,msg,hour,min)
 
 def get_m_info(id):  #get info of all medicine (list)
     data=get_data()
@@ -170,45 +162,45 @@ def get_phone(id):   #get phone number
 def get_time(t):  #give the time of employee
     return t.get('time')
 
-def sendwhatmsg(
-    phone_no: str,
-    message: str,
-    time_hour: int,
-    time_min: int,
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
-) -> None:
-    """Send a WhatsApp Message at a Certain Time"""
+# def sendwhatmsg(
+#     phone_no: str,
+#     message: str,
+#     time_hour: int,
+#     time_min: int,
+#     wait_time: int = 15,
+#     tab_close: bool = False,
+#     close_time: int = 3,
+# ) -> None:
+#     """Send a WhatsApp Message at a Certain Time"""
 
-    if not core.check_number(number=phone_no):
-        raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
+#     if not core.check_number(number=phone_no):
+#         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
 
-    if time_hour not in range(25) or time_min not in range(60):
-        raise Warning("Invalid Time Format!")
+#     if time_hour not in range(25) or time_min not in range(60):
+#         raise Warning("Invalid Time Format!")
 
-    current_time = datetime.now()
-    left_time = datetime.strptime(
-        f"{time_hour}:{time_min}:0", "%H:%M:%S"
-    ) - datetime.strptime(
-        f"{current_time.tm_hour}:{current_time.tm_min}:{current_time.tm_sec}",
-        "%H:%M:%S",
-    )
+#     current_time = datetime.now()
+#     left_time = datetime.strptime(
+#         f"{time_hour}:{time_min}:0", "%H:%M:%S"
+#     ) - datetime.strptime(
+#         f"{current_time.tm_hour}:{current_time.tm_min}:{current_time.tm_sec}",
+#         "%H:%M:%S",
+#     )
 
-    if left_time.seconds < wait_time:
-        raise exceptions.CallTimeException(
-            "Call Time must be Greater than Wait Time as WhatsApp Web takes some Time to Load!"
-        )
+#     if left_time.seconds < wait_time:
+#         raise exceptions.CallTimeException(
+#             "Call Time must be Greater than Wait Time as WhatsApp Web takes some Time to Load!"
+#         )
 
-    sleep_time = left_time.seconds - wait_time
-    print(
-        f"In {sleep_time} Seconds WhatsApp will open and after {wait_time} Seconds Message will be Delivered!"
-    )
-    time.sleep(sleep_time)
-    core.send_message(message=message, receiver=phone_no, wait_time=wait_time)
-    log.log_message(_time=current_time, receiver=phone_no, message=message)
-    if tab_close:
-        core.close_tab(wait_time=close_time)
+#     sleep_time = left_time.seconds - wait_time
+#     print(
+#         f"In {sleep_time} Seconds WhatsApp will open and after {wait_time} Seconds Message will be Delivered!"
+#     )
+#     time.sleep(sleep_time)
+#     core.send_message(message=message, receiver=phone_no, wait_time=wait_time)
+#     log.log_message(_time=current_time, receiver=phone_no, message=message)
+#     if tab_close:
+#         core.close_tab(wait_time=close_time)
 
 if __name__ == '__main__':
 	app.run(debug=True)

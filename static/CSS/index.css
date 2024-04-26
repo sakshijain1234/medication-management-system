@@ -1,17 +1,17 @@
-
-body{
+body {
     text-align: center;
-     background-color: #ffffff;
+    background-color: #ffffff;
     flex-wrap: wrap;
 }
 
-nav{
+nav {
     /* position: fixed; */
     height: 75px;
     background-color: purple;
     padding-top: 10px;
     /* background-size: cover; */
 }
+
 nav a {
     color: #ffffff;
     text-decoration: none;
@@ -28,96 +28,119 @@ ul {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    
+
 
 }
-.form_d{
+
+.form_d {
     display: flex;
     flex-direction: column;
 }
+
 form {
     margin: auto;
     padding-top: 40px;
-    padding-bottom: 40px; 
-    border-style:outset;
+    padding-bottom: 40px;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-style: outset;
     border-color: purple;
 }
 
-#buy a:hover{
-     color: rgb(247, 95, 120);
-     font-size: large;
+
+#buy a:hover {
+    color: rgb(247, 95, 120);
+    font-size: large;
 }
 
-#home{
+#home {
     margin-top: 50px;
     justify-content: center;
-    
+
 }
-#info{
+
+#info {
     margin-top: 75px;
     padding-top: 25px;
     max-height: fit-content;
-    
+
 }
-#info form{
+
+#info form {
     color: black;
 }
-#shedule{
+
+#shedule {
     padding-top: 100px;
 }
-.center{
+
+.center {
     margin-left: auto;
     margin-right: auto;
 }
-#info,#about{
+
+#info,
+#about {
     color: #ffffff;
-    
+
     background-color: purple;
 }
-#info form{
+
+#info form {
     background-color: #ffffff;
     border-color: #ffffff;
 }
-#shed_btn{
+
+#shed_btn {
     background-color: #ffffff;
     border-color: purple;
 }
-#shed_btn:hover{
-    background-color:rgb(247, 95, 120);
+
+#shed_btn:hover {
+    background-color: rgb(247, 95, 120);
     border-color: rgb(247, 95, 120);
-    
-    a{
+
+    a {
         color: #ffffff;
     }
 }
-#shed_btn a{
+
+#shed_btn a {
     color: purple;
     text-decoration: none;
 }
-#submit:hover,#m_add:hover{
-       background-color: rgb(247, 95, 120);
-       color: #ffffff;
-       border-color: rgb(247, 95, 120);;
+
+#submit:hover,
+#m_add:hover {
+    background-color: rgb(247, 95, 120);
+    color: #ffffff;
+    border-color: rgb(247, 95, 120);
+    ;
 }
 
 /* #shed{
     border-style:double;
     border: purple;
 } */
-table, th, td {
-    border: 3px solid  purple;
+table,
+th,
+td {
+    border: 3px solid purple;
     border-collapse: collapse;
-  }
-  td{
-    padding:2px;
+}
+
+td {
+    padding: 2px;
     padding-left: 10px;
     padding-right: 10px;
-  }
-  #des{
+}
+
+#des {
     width: 50%;
     padding: 12px;
     resize: vertical;
-  }
+}
+
 /* @media screen and (max-width: 600px) {
     nav{
       float: none;
