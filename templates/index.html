@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Patient info</title>
+    <link rel="stylesheet" href="\static\CSS\index.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{url_for('home',id=id)}}">Home</a></li>
+                <li><a href="#info">Information</a></li>
+                <li><a href="{{url_for('shedule',id=id)}}">Shedule</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="home">
+            <div class="form_d">
+                <div id="bg_img"></div>
+                <div>
+                    <h1>Patient information</h1>
+                </div>
+
+                <div style="text-align: center;">
+                    <form id="P_info" method="POST" action="{{url_for('home',id=id)}}">
+                        <div><label for="P_name">Enter name of patient:</label></div>
+                        <div><input type="text" name="P_name" id="P_name" value="{{ user_data['p_name'] }}" required><br></div><br />
+                        <div>
+                            <label for="gender">Enter gender of patient:</label><br />
+                            <select name="gender" value="{{ user_data['gender'] }}">
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Trans">Trans</option>
+                                <option value="Any">Prefer not to say</option>
+                            </select>
+                            <br>
+                        </div><br />
+                        <div><label for="age">Enter age of patient:</label></div>
+                        <div><input type="number" name="age" id="age" value="{{ user_data['age'] }}" required><br></div>
+                        <br />
+                        <div>
+                            <button id="submit" value="submit_p_info" name="submit" onclick="alert('Patient Information successfully submitted.')">submit</button>
+                        </div>
+                    </form>
+                    <br />
+                </div>
+            </div>
+
+            <div id="buy" style="text-align: center;">
+                <a
+                    href="https://www.netmeds.com/healthstore?source_attribution=ADW-CPC-Search-PY-Generic&utm_source=ADW-CPC-Search-PY-Generic&utm_medium=CPC&utm_campaign=ADW-CPC-Search-PY-Generic&gad_source=1&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJYKA9oULYo6QR2D6S7UxigBfx6GlQIESwzdVJjPkPqWc4rDWWX80ngaAgVdEALw_wcB">Click
+                    here to buy medicines</a>
+            </div>
+        </div>
+    </main>
+    <div id="info">
+
+            <div style="text-align: center;">
+                <h1>Medicine information</h1>
+            </div>
+
+            <form action=""  id="M_info" method="post" action="{{url_for('home',id=id)}}" style="text-align:center;">
+
+                <label for="name">Name</label><br />
+                <input type="text" name="m_name" id="m_name" placeholder="name of medicine" required><br /><br />
+                <label for="duration">Duration</label><br />
+                <input type="number" name="duration" id="duration" placeholder="Total days" required><br /><br />
+                <!-- <label for="duration">duration</label><br />
+                <input type="number" name="duration" id="duration" placeholder="medicine per day"><br /><br /> -->
+                <label for="time">Time:</label><br />
+                <input type="time" name="m_time" id="m_time" placeholder="Time of medicine in 24 hours"><br /><br />
+                <!-- <button id="add_time" onclick="addTimeField()">Add</button><br /><br /> -->
+                <label for="des">Description</label><br />
+                <textarea name="des" id="des">
+                </textarea><br/>
+                <button id="submit" value="submit_m_info" name="submit" onclick="med_added()">submit</button>
+                <button id="m_add" disabled>Edit medicine</button>
+
+            </form>
+        </div>
+        <div id="shedule">
+            <button id="shed_btn">
+                <a href="{{url_for('shedule',id=id)}}">Show my medicine shedule</a>
+            </button>
+        </div>
+        <footer style="background-color: black;" id="about">
+            <h5>hi i am in footer</h5>
+        </footer>
+</body>
+<script>
+    function med_added(){
+        const med_name=document.getElementById("m_name").value;
+        const med_duration=document.getElementById("duration").value;
+        const med_time=document.getElementById("m_time").value;
+        alert("medicine is added successfully\n"+med_name+"\nfor "+med_duration+" days at "+med_time);
+    }
+
+    function addTimeField() {
+        var form = document.getElementById("M_info");
+        var newInput = document.createElement("INPUT");
+        newInput.setAttribute("type", "time");
+        newInput.setAttribute("name", "m_time");
+        var targetPosition = 20;
+        var referenceElement = form.childNodes[targetPosition];
+        form.insertBefore(newInput, referenceElement);
+}  
+</script>
+
+</html>

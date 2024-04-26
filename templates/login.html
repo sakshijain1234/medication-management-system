@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+
+    <style>
+        *{
+            text-align: center;
+            
+        }
+        body{
+            margin-top: 100px;
+            background-color: purple
+        }
+        #login{
+            display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-style: outset;
+    padding-bottom: 50px;
+    background-color: white;
+    
+        }
+        button:hover{
+            background-color: rgb(247, 95, 120);
+            color: white;
+            border-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="login">
+        
+        <form method="post">
+            <h2>login</h2>
+            <label for="username">Username</label><br/>
+            <input type="text" name="username" id="username"><br/><br/>
+            <label for="password">Password</label><br/>
+            <input type="password" name="password" id="password"><br/><br/>
+            <button name="button" value="login">
+                login
+            </button>
+            {% if found==false %}
+            <script>
+                alert("User not found!!!\nPlease signup");
+            </script>
+            {% endif %}
+            <p style="color: purple;">don,t have an account</p>
+            <button name="button" value="signup">
+                signup
+            </button>
+                
+        </form>
+    </div>
+</body>
+</html>

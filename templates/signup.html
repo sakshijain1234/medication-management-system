@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+
+    <style>
+        *{
+            text-align: center;
+            
+        }
+        body{
+            margin-top: 100px;
+            background-color: purple
+        }
+        #signup{
+            display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-style: outset;
+    padding-bottom: 50px;
+    background-color: white;
+    
+        }
+        button:hover{
+            background-color: rgb(247, 95, 120);
+            color: white;
+            border-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="signup">
+        
+        <form method="post" action="/signup">
+            <h2>Signup</h2>
+            <label for="username">Create Username</label><br/>
+            <input type="text" name="username" id="username" value=""><br/><br/>
+            <label for="password">Create Password</label><br/>
+            <input type="password" name="password" id="password" value=""><br/><br/>
+            <button name="button" value="signup" onclick="validate()">
+                submit
+            </button>
+            <p>Already have an account</p>
+            <button name="button" value="login">
+               login
+            </button>
+            {% if found==true %}
+            <script>
+                alert("woww! you are successfully registered\nPlease login to continue");
+            </script>
+            {% endif %}
+        </form>
+    </div>
+</body>
+<script>
+    function validate(){
+        var username=document.getElementById("username").value;
+        var password=document.getElementById("password").value;
+        if (username===""){
+            alert("username can't be empty");
+        }
+        else if(password===""){
+            alert("password can't be empty");
+        }
+    }
+</script>
+</html>

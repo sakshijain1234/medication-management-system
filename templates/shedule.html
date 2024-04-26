@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shedule</title>
+
+    <style>
+        * {
+            text-align: center;
+
+        }
+
+        #shedule {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border-style: outset;
+            padding-bottom: 50px;
+            background-color: white;
+
+        }
+        #table{
+        padding-top: 20px;
+        }
+        table, th, td {
+            border: 2px solid  purple;
+            border-collapse: collapse;
+          }
+          td{
+            padding:2px;
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+
+        body {
+            margin-top: 100px;
+            background-color: purple
+        }
+        #memo{
+            color:white;
+        }
+        #rem:hover{
+            background-color: green;
+            border-color: green;
+            color: white;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="index.css"> -->
+</head>
+
+<body>
+    <div id="shedule">
+        <div id="table">
+            <table class="center" id="shed">
+                <tr>
+                    <td>Name</td>
+                    <td>Duration</td>
+                    <td>Time</td>
+                    <td>Description</td>
+                </tr>
+                {% if found==true %}
+                    {% for i in data%}
+                    <tr>
+                    <td>{{i["m_info"]}}</td>
+                    <td>{{i["duration"]}}</td>
+                    <td>{{i["time"]}}</td>
+                    <td>{{i["description"]}}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <script>alert("you have not added any medicines yet!!!")</script>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+        <div id="memo">
+        <p>Enter whatsapp number if you want<br/> get notified for medicine</p>
+        <form action="" method="post">
+            <label for="phone">mobile no:</label>
+            <input type="phone" name="phone" id="phone" placeholder="add + country code" value="">
+            <button name="rem" value="rem" id="rem">ON</button>
+        </form>
+        </div>
+        <br/>
+        <button style="background-color: white;border-color:white">
+            <a href="{{url_for('home',id=id)}}" style="text-decoration: none;color:purple">Add more medicines</a>
+        </button>
+</body>
+
+</html>
